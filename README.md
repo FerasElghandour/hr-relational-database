@@ -8,6 +8,15 @@ A seven-table relational core with integrity constraints and a salary-free direc
 
 ![Implementation mechanism: Employee and reporting hierarchy → Referenced education and job tables → Job history and salary records → Foreign-key constraints → Directory view excludes salary](assets/mechanism.svg)
 
+
+
+## Verify database behavior
+
+The portable SQLite checks are retained. A rollback-only PostgreSQL integration script now checks the reporting role, salary exclusion and actual directory query in a disposable database.
+
+[Commands, artifacts and benchmark scope](BENCHMARKS.md) · [Versioned profiles](reproduction.json)
+
+
 ## Try a small example
 
 A small offline fixture exercises the public implementation. It demonstrates the behavior shown below; it does not replace the historical dataset, benchmark or production validation.
