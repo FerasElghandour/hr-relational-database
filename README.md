@@ -1,18 +1,46 @@
 # HR Relational Database and Access Control
 
-**Feras Elghandour** · Technical case study
-
 Represent employee history, organizational structure, and salary records in a normalized relational database with deliberate access boundaries.
 
 ## Implementation
 
 A seven-table relational core with integrity constraints and a salary-free directory view, plus separate PostgreSQL role setup.
 
-```mermaid
-flowchart LR
-    A[Validated inputs] --> B[Portable implementation]
-    B --> C[Evaluation and contract checks]
-    C --> D[Inspectable results]
+![Implementation mechanism: Employee and reporting hierarchy → Referenced education and job tables → Job history and salary records → Foreign-key constraints → Directory view excludes salary](assets/mechanism.svg)
+
+## Try a small example
+
+A small offline fixture exercises the public implementation. It demonstrates the behavior shown below; it does not replace the historical dataset, benchmark or production validation.
+
+After the local setup below, run from the repository root:
+
+```sh
+python examples/quickstart.py
+```
+
+The [example source](examples/quickstart.py), [captured output](examples/expected-output.txt) and [execution record](examples/environment.json) keep this demonstration inspectable. Floating-point values may vary with library versions.
+
+Observed output from this run:
+
+```text
+{
+  "directory_columns": [
+    "employee_id",
+    "display_name",
+    "email",
+    "hired_on",
+    "manager_name"
+  ],
+  "directory_rows": [
+    [
+      1,
+      "Example employee",
+      "example@example.invalid",
+      "2024-01-01",
+      null
+    ]
+  ]
+}
 ```
 
 ## Completed study
@@ -30,7 +58,6 @@ python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 python smoke_test.py
-python smoke_test.py
 ```
 
 Prepare your own inputs as described in [DATA.md](DATA.md). Tests use generated fixtures and do not need credentials or provider calls. [VALIDATION.md](VALIDATION.md) records their scope.
@@ -38,5 +65,3 @@ Prepare your own inputs as described in [DATA.md](DATA.md). Tests use generated 
 ## Practical relevance and limitations
 
 Run only in a dedicated development database. This source edition has not been certified against an operational HR system or audited production permissions. Existing installations need migrations rather than re-running initial DDL.
-
-This edition makes the core behavior reusable and inspectable. Historical metrics and synthetic contract tests provide different kinds of evidence; neither establishes client deployment or commercial impact.

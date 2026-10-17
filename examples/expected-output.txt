@@ -1,0 +1,18 @@
+{
+  "directory_columns": [
+    "employee_id",
+    "display_name",
+    "email",
+    "hired_on",
+    "manager_name"
+  ],
+  "directory_rows": [
+    [
+      1,
+      "Example employee",
+      "example@example.invalid",
+      "2024-01-01",
+      null
+    ]
+  ]
+}
